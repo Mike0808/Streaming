@@ -42,6 +42,28 @@
 #        ansible_distribution == "Ubuntu"
 #   tags: [service]
 
+- name: Remove nifi init.d service
+  file: path=/etc/init.d/nifi state=absent
+  when: >
+    (ansible_distribution == "Amazon" or
+     (ansible_distribution == "CentOS" and
+       ansible_distribution_major_version < "7") or 
+       ansible_distribution == "Ubuntu" )
+  notify:
+    - reload systemd
+  tags: [service]
+
+- name: Remove nifi systemd service
+  file: path=/etc/systemd/system/nifi.service state=absent
+  when: >
+    (ansible_distribution == "Amazon" or
+     (ansible_distribution == "CentOS" and
+       ansible_distribution_major_version < "7") or 
+       ansible_distribution == "Ubuntu" )
+  notify:
+    - reload systemd
+  tags: [service]
+
 - name: Ensure nifi-required directories exist and are world-readable
   file: path="{{ item }}" state=directory owner="{{ nifi_user }}" group="{{ nifi_user }}" mode=0755
   with_items:

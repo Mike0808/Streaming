@@ -5,8 +5,8 @@
   systemd:
     daemon_reload: yes
   when: >
-    (ansible_distribution == "CentOS" or ansible_distribution == "Red Hat Enterprise Linux") and
-    ansible_distribution_major_version >= "7"
+    ((ansible_distribution == "CentOS"  and
+    ansible_distribution_major_version >= "7") or ansible_distribution == "RedHat" or ansible_distribution="Amazon")
 
 - name: restart nifi
   service: name=nifi state=restarted enabled=yes
