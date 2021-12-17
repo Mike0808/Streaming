@@ -118,10 +118,10 @@
     cacheable: yes
 
 - name: include ./nifi/{{ nifi_cluster | bool | ternary("cluster", "standalone") }}.yml
-  include_tasks: ./nifi/install.yml
+  include_tasks: ./nifi/install.yaml
 
 - name: include ./nifi/{{ nifi_cluster | bool | ternary("cluster", "standalone") }}.yml
-  include_tasks: ./nifi/config.yml
+  include_tasks: ./nifi/config.yaml
 
 # # Just be opinionated until bringing systemd back in.
 # - name: include ./init/supervisord.yml
