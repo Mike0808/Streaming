@@ -30,7 +30,7 @@
   tags: [ scripts ]
 
 - name: Ensure NiFi service starts on reboot
-  service: name=nifi enabled=yes
+  service: name=nifi state=started enabled=yes
 
 # - name: Ensure NiFi is restarted
 #   service: name=nifi state=restarted
