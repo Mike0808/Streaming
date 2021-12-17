@@ -162,19 +162,19 @@
 #         backrefs: yes
 #   when: nifi_java_use_g1gc|bool and java_version|string != '1.8' and java_version|string != '1.8.0' and java_version|string != '8'
 
-# - name: set -Xms={{ nifi_java_min_heap }} in ./conf/bootstrap.conf
-#   lineinfile:
-#     path: "{{ nifi_home }}/conf/bootstrap.conf"
-#     regexp: '^java\.arg.(\d+)=-Xms.*'
-#     line: 'java.arg.\1=-Xms{{ nifi_java_min_heap }}'
-#     backrefs: yes
+- name: set -Xms={{ nifi_java_min_heap }} in ./conf/bootstrap.conf
+  lineinfile:
+    path: "{{ nifi_home }}/conf/bootstrap.conf"
+    regexp: '^java\.arg.(\d+)=-Xms.*'
+    line: 'java.arg.\1=-Xms{{ nifi_java_min_heap }}'
+    backrefs: yes
 
-# - name: set -Xmx={{ nifi_java_max_heap }} in ./conf/bootstrap.conf
-#   lineinfile:
-#     path: "{{ nifi_home }}/conf/bootstrap.conf"
-#     regexp: '^java\.arg.(\d+)=-Xmx.*'
-#     line: 'java.arg.\1=-Xmx{{ nifi_java_max_heap }}'
-#     backrefs: yes
+- name: set -Xmx={{ nifi_java_max_heap }} in ./conf/bootstrap.conf
+  lineinfile:
+    path: "{{ nifi_home }}/conf/bootstrap.conf"
+    regexp: '^java\.arg.(\d+)=-Xmx.*'
+    line: 'java.arg.\1=-Xmx{{ nifi_java_max_heap }}'
+    backrefs: yes
 
 - name: enable compressed logs in ./conf/logback.xml
   replace:
