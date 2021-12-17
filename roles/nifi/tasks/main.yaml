@@ -54,8 +54,8 @@
 #     line: vm.swapiness={{ vm_swapiness }}
 #   tags: [always]
 
-- name: include java/{{ ansible_os_family }}.yml
-  include_tasks: roles/nifi/tasks/java/{{ ansible_os_family }}.yml
+- name: include java/{{ ansible_os_family }}.yaml
+  include_tasks: ./java/{{ ansible_os_family }}.yaml
   tags: [java, zookeeper]
 
 # See https://www.java.com/en/configure_crypto.html
