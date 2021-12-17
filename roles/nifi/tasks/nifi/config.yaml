@@ -30,8 +30,8 @@
   tags: [ scripts ]
 
 - name: Ensure NiFi service starts on reboot
-  service: name=nifi state=started enabled=yes
+  service: name=nifi-current state=started enabled=yes
 
-- name: Ensure NiFi is restarted
-  service: name=nifi state=restarted
-  when: nifi_force_restart
+# - name: Ensure NiFi is restarted
+#   service: name=nifi state=restarted
+#   when: nifi_force_restart
