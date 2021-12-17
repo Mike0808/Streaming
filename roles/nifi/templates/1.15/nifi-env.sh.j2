@@ -23,20 +23,7 @@ export JAVA_HOME={{ java_home }}
 #export JAVA_HOME=/usr/java/jdk1.8.0/
 {% endif %}
 
-setOrDefault() {
-  envvar="$1"
-  default="$2"
-
-  res="$default"
-  if [ -n "$envvar" ] && [ "$NIFI_OVERRIDE_NIFIENV" = "true" ]
-  then
-    res="$envvar"
-  fi
-
-  echo "$res"
-}
-
-export NIFI_HOME=$(cd "${SCRIPT_DIR}" && cd .. && pwd)
+export NIFI_HOME="{{ nifi_home }}"
 
 #The directory for the NiFi pid file
 export NIFI_PID_DIR="{{ nifi_pid_dir }}"
