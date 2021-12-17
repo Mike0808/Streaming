@@ -22,12 +22,12 @@
     # - restart nifi
   tags: [ config ]
 
-# - name: copy nifi scripts
-#   template: src="{{ item.src }}" dest="{{ item.dest }}" owner="{{ nifi_user }}" group="{{ nifi_user }}" mode='0755'
-#   with_items:
-#     - { src: "{{ nifi_major_version }}/nifi.sh.j2", dest: "{{ nifi_home }}/bin/nifi.sh" }
-#     # - { src: "{{ nifi_major_version }}/nifi-env.sh.j2", dest: "{{ nifi_home }}/bin/nifi-env.sh" }
-#   tags: [ scripts ]
+- name: copy nifi scripts
+  template: src="{{ item.src }}" dest="{{ item.dest }}" owner="{{ nifi_user }}" group="{{ nifi_user }}" mode='0755'
+  with_items:
+    - { src: "{{ nifi_major_version }}/nifi.sh.j2", dest: "{{ nifi_home }}/bin/nifi.sh" }
+    - { src: "{{ nifi_major_version }}/nifi-env.sh.j2", dest: "{{ nifi_home }}/bin/nifi-env.sh" }
+  tags: [ scripts ]
 
 - name: Ensure NiFi service starts on reboot
   service: name=nifi enabled=yes

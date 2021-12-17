@@ -56,10 +56,10 @@
     - "{{ nifi_database_repository }}"
     - "{{ nifi_flowfile_repository }}"
 
-# - name: Ensure nifi tmp_dir exists
-#   file: path="{{ nifi_tmp_dir }}" state=directory owner="{{ nifi_user }}" group="{{ nifi_user }}" mode=0755
-#   when:
-#     - nifi_tmp_dir is defined
+- name: Ensure nifi tmp_dir exists
+  file: path="{{ nifi_tmp_dir }}" state=directory owner="{{ nifi_user }}" group="{{ nifi_user }}" mode=0755
+  when:
+    - nifi_tmp_dir is defined
 
 - name: ensure nifi content repo directories exist
   file: path="{{ item }}" state=directory owner="{{ nifi_user }}" group="{{ nifi_user }}" mode=0755
@@ -76,10 +76,10 @@
     - "{{ zookeeper_install_prefix }}/zookeeper-{{ zookeeper_version }}/version-2"
   when: nifi_state_management_embedded_zookeeper_start
 
-# - name: add myid file for embedded zookeeper
-#   template: src="myid.j2" dest="{{ nifi_zookeeper_dir }}/myid" owner="{{ nifi_user }}" group="{{ nifi_user }}" mode='0644'
-#   when: nifi_state_management_embedded_zookeeper_start
+- name: add myid file for embedded zookeeper
+  template: src="myid.j2" dest="{{ nifi_zookeeper_dir }}/myid" owner="{{ nifi_user }}" group="{{ nifi_user }}" mode='0644'
+  when: nifi_state_management_embedded_zookeeper_start
 
-# - name: ensure nifi extra directories exist
-#   file: path="{{ item }}" state=directory owner="{{ nifi_user }}" group="{{ nifi_user }}" mode=0755
-#   with_items: "{{ nifi_extra_dirs | default([]) }}"
+- name: ensure nifi extra directories exist
+  file: path="{{ item }}" state=directory owner="{{ nifi_user }}" group="{{ nifi_user }}" mode=0755
+  with_items: "{{ nifi_extra_dirs | default([]) }}"
