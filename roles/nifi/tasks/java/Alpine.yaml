@@ -14,6 +14,13 @@
       when: ansible_os_family == "Alpine"
       tags: [java, zookeeper]
 
+    - name: install unzip
+      apk:
+        name: unzip
+        state: present
+      when: ansible_os_family == "Alpine"
+      tags: [java, zookeeper]
+
     - name: set java_home
       set_fact:
         java_home: "{{ '/usr/lib/jvm/java-{{ java_version }}-openjdk' | realpath }}"

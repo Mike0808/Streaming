@@ -15,6 +15,14 @@
       when: ansible_os_family == "RedHat"
       tags: [java, zookeeper]
 
+    - name: install unzip
+      dnf:
+        name: unzip
+        state: present
+      when: ansible_os_family == "RedHat"
+      tags: [java, zookeeper]
+
+
     - name: set java_home
       set_fact:
         java_home: "{{ '/usr/lib/jvm/jre-{{ java_version }}' | realpath }}"
