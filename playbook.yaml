@@ -1,6 +1,12 @@
 ---
 - name: ensure prepare
   hosts: all
+  vars: 
+    nifi_log_level_root: WARN
+    nifi_node_jvm_memory: '10240M'
+    nifi_custom_nars: [ '/opt/extra-nars' ]
+    nifi_single_node: False
+    nifi_authorized_nodes_list: ['node1', 'node2']  
   become: true
   pre_tasks:
   roles:
