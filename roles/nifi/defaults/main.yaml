@@ -34,7 +34,6 @@ nifi_java_max_heap: 512m
 nifi_web_http_host: "{{ ansible_hostname }}"
 nifi_web_http_port: 8080
 nifi_web_https_port: 8443
-nifi_remote_input_socket_port: 10443
 nifi_web_max_header_size: 16 KB
 nifi_web_proxy_context_path: 
 nifi_web_proxy_host: 
@@ -55,6 +54,12 @@ nifi_cluster_flow_election_max_candidates: 2
 nifi_log_compression: gzip
 nifi_zookeeper_connect_string: # set if have a zookeeper quorum
 
+# Site to Site properties
+nifi_remote_input_host:
+nifi_remote_input_secure: False
+nifi_remote_input_socket_port: 10443
+nifi_remote_input_http_enabled: False
+nifi_remote_input_http_transaction_ttl: '30 sec'
 
 # defaults file / directories for nifi
 nifi_database_repository: "{{ nifi_home }}/database_repository"
