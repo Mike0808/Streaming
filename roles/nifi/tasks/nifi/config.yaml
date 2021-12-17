@@ -39,6 +39,8 @@
 
 - name: Ensure NiFi service starts on reboot
   service: name=nifi state=started enabled=yes
+  notify:
+    - reload systemd
 
 # - name: Ensure NiFi is restarted
 #   service: name=nifi state=restarted
