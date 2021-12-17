@@ -107,7 +107,7 @@ nifi_swap_out_threads: 4
 
 # NiFi zookeeper settings
 nifi_zookeeper_servers: ['control_node']
-nifi_zookeeper_dir: /data/zookeeper
+nifi_zookeeper_dir: zookeeper
 nifi_state_management_embedded_zookeeper_start: true
 nifi_zookeeper_root_node: '/nifi'
 nifi_zookeeper_session_timeout: '10 seconds'
