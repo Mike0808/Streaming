@@ -1,0 +1,8 @@
+---
+- name: ensure prepare
+  hosts: all
+  become: true
+  pre_tasks:
+  roles:
+  # - zookeeper
+  - nifi

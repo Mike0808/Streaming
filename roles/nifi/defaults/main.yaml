@@ -1,0 +1,162 @@
+---
+# defaults file for ansible-nifi
+java_version: 11
+pam_limits_nofile: 50000
+pam_limits_nproc: 10000
+net_ipv4_ip_local_port_range: 10000 65000
+vm_swapiness: 0
+create_etc_hosts: yes
+force_tls_v1_2: yes
+
+# defaults file for nifi
+nifi_major_version: "{{ nifi_version | splitext | first }}"
+
+# NiFi service user settings
+nifi_create_home_dir: True
+nifi_home_dir: "/home/{{ nifi_user }}"
+nifi_default_shell: /bin/bash
+
+# installation locations
+nifi_base_dir: /opt/nifi
+nifi_etc_dir: /etc/nifi
+nifi_log_dir: /var/log/nifi
+nifi_pid_dir: /var/run/nifi
+
+
+nifi_version: 1.15.1
+nifi_run_as: nifi
+nifi_install_prefix: /opt
+nifi_java_use_g1gc: yes
+nifi_java_min_heap: 512m
+nifi_java_max_heap: 512m
+
+# Web properties
+nifi_web_http_host: "{{ ansible_hostname }}"
+nifi_web_http_port: 8080
+nifi_web_https_port: 8443
+nifi_remote_input_socket_port: 10443
+nifi_web_max_header_size: 16 KB
+nifi_web_proxy_context_path: 
+nifi_web_proxy_host: 
+
+# NiFi cluster setup
+nifi_cluster_node_load_balance_port: 6342
+nifi_cluster: yes
+nifi_cluster_node_address: "{{ ansible_hostname }}"
+nifi_cluster_is_node: True
+nifi_cluster_node_protocol_port: 11443
+nifi_cluster_node_protocol_threads: 10
+nifi_cluster_node_protocol_max_threads: 50
+nifi_cluster_flow_election_wait_time: 120 secs
+nifi_cluster_flow_election_candidates: "{{ ansible_play_hosts | length }}"
+nifi_cluster_flow_election_max_wait_time: 5
+nifi_cluster_flow_election_max_candidates: 2
+
+nifi_log_compression: gzip
+nifi_zookeeper_connect_string: # set if have a zookeeper quorum
+
+
+# defaults file / directories for nifi
+nifi_database_repository: "{{ nifi_home }}/database_repository"
+nifi_flowfile_repository: "{{ nifi_home }}/flowfile_repository"
+nifi_content_repositories: [ "{{ nifi_home }}/content_repository" ]
+nifi_provenance_repositories: [ "{{ nifi_home }}/provenance_repository" ]
+nifi_status_repository_questdb_persist_location: "{{ {{ nifi_home }}/status_repository }}"
+
+# Content Repository Settings
+nifi_content_claim_max_flow_files: 100
+nifi_content_claim_max_appendable_size: '10 MB'
+nifi_content_archive_max_retention_period: '12 hours'
+nifi_content_archive_max_usage_percentage: '50%'
+nifi_content_archive_enabled: 'false'
+nifi_content_always_sync: 'false'
+
+# Provenance Settings
+nifi_provenance_implementation: PersistentProvenanceRepository
+nifi_provenance_max_storage_time: '24 hours'
+nifi_provenance_max_storage_size: '1 GB'
+nifi_provenance_rollover_time: '30 secs'
+nifi_provenance_rollover_size: '100 MB'
+nifi_provenance_query_threads: 2
+nifi_provenance_index_threads: 2
+nifi_provenance_repository_buffer_size: 100000
+nifi_provenance_indexed_fields: EventType, FlowFileUUID, Filename, ProcessorID, Relationship
+
+# Status repository settings
+nifi_components_status_repository_buffer_size: 1440
+nifi_components_status_snapshot_frequency: '1 min'
+
+# Watched directory watched for new NARs
+nifi_nar_library_autoload_directory: "{{ nifi_home }}/extensions"
+
+nifi_graceful_shutdown_secs: '20'
+
+nifi_node_jvm_memory: '1024m'
+nifi_java_command: 'java'
+
+# Queue swap settings
+nifi_queue_swap_threshold: 20000
+nifi_swap_in_threads: 1
+nifi_swap_out_threads: 4
+
+# NiFi zookeeper settings
+nifi_zookeeper_servers: ['control_node']
+nifi_zookeeper_dir: /data/zookeeper
+nifi_state_management_embedded_zookeeper_start: true
+nifi_zookeeper_root_node: '/nifi'
+nifi_zookeeper_session_timeout: '10 seconds'
+nifi_zookeeper_autopurge_purgeInterval: 24
+nifi_zookeeper_autopurge_snapRetainCount: 30
+
+# Security settings
+nifi_initial_admin:
+nifi_is_secure: True
+nifi_security_keystore: "{{ nifi_conf_dir }}/keystore.jks"
+nifi_security_keystoreType: jks
+nifi_security_keystorePasswd: ''
+nifi_security_keyPasswd: "{{ nifi_security_keystorePasswd }}"
+nifi_security_truststore: "{{ nifi_conf_dir }}/truststore.jks"
+nifi_security_truststoreType: jks
+nifi_security_truststorePasswd: ''
+
+# Logback logging levels and settings
+nifi_log_app_file_retention: 10
+nifi_log_user_file_retention: 10
+nifi_log_boot_file_retention: 10
+nifi_log_level_root: INFO
+nifi_log_level_org_apache_nifi: INFO
+nifi_log_level_org_apache_nifi_processors: WARN
+nifi_log_level_org_apache_nifi_processors_standard_LogAttribute: INFO
+nifi_log_level_org_apache_nifi_controller_repository: WARN
+nifi_log_level_org_apache_nifi_controller_repository_StandardProcessSession: WARN
+nifi_log_level_org_apache_nifi_cluster: INFO
+nifi_log_level_org_apache_nifi_server_JettyServer: INFO
+nifi_log_level_org_eclipse_jetty: INFO
+nifi_log_level_org_apache_nifi_web_security: INFO
+nifi_log_level_org_apache_nifi_web_api_config: INFO
+nifi_log_level_org_apache_nifi_authorization: INFO
+nifi_log_level_org_apache_nifi_cluster_authorization: INFO
+nifi_log_level_org_apache_nifi_bootstrap: INFO
+nifi_log_level_org_apache_nifi_bootstrap_Command: INFO
+nifi_log_level_org_apache_nifi_web_filter_RequestLogger: INFO
+nifi_log_level_org_apache_nifi_web_api_AccessResource: INFO
+nifi_log_level_org_wali: WARN
+nifi_custom_log_levels: []
+
+# Extra Properties
+nifi_variable_registry_properties: [ "{{ nifi_conf_dir }}/extra-args.properties" ]
+
+zookeeper_version: 3.7.0
+zookeeper_install: # set to 'local' to install ZooKeeper on the NiFi nodes, 'embedded' to use the embedded NiFi ZooKeeper server, and 'none' if providing an externally managed ZooKeeper to use with NiFi
+zookeeper_install_prefix: /opt
+zookeeper_myid: # leave this empty to auto-assign
+zookeeper_client_port: 2181
+zookeeper_server_ports: 2888:3888
+zookeeper_hosts: "{{ ansible_play_hosts | map('extract', hostvars, 'ansible_hostname') | list }}"
+zookeeper_connect_string: "{{ zookeeper_hosts | join(':' + zookeeper_client_port|string + ',') }}:{{ zookeeper_client_port }}"
+zookeeper_admin_server_enabled: yes
+zookeeper_admin_server_port: 9099
+package_base_url: # leave this empty to fetch from Apache Archive or mirror
+apache_archive_url: https://archive.apache.org/dist/
+apache_mirror_info_url: https://www.apache.org/dyn/closer.lua
+apache_mirror_info_country_codes: # leave this empty to check all countries; this can sometimes result in the preferred mirror being downloads.a.o no matter where the host is located
