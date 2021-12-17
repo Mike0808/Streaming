@@ -29,12 +29,12 @@
     - { src: "{{ nifi_major_version }}/nifi-env.sh.j2", dest: "{{ nifi_home }}/bin/nifi-env.sh" }
   tags: [ scripts ]
 
-- name: install nifi like a service
-  shell: "{{ nifi_bin_dir }}/nifi.sh install"
-  register: grep_result
-  tags: [scripts]
-  notify:
-    - reload systemd
+# - name: install nifi like a service
+#   shell: "{{ nifi_bin_dir }}/nifi.sh install"
+#   register: grep_result
+#   tags: [scripts]
+#   notify:
+#     - reload systemd
      
 
 - name: Ensure NiFi service starts on reboot

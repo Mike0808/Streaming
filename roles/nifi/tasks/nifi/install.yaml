@@ -21,26 +21,26 @@
   notify:
   - restart nifi
 
-# - name: Create nifi systemd service
-#   template: src=nifi.service.j2 dest="{{ nifi_service }}" owner=root group=root mode=0644
-#   notify:
-#     - reload systemd
-#     - restart nifi
-#   when: >
-#     ansible_distribution == "Amazon" or
-#     (ansible_distribution == "CentOS" and
-#     ansible_distribution_major_version < "7") or 
-#     ansible_distribution == "Ubuntu"
-#   tags: [service]
+- name: Create nifi systemd service
+  template: src=nifi.service.j2 dest="{{ nifi_service }}" owner=root group=root mode=0644
+  notify:
+    - reload systemd
+    - restart nifi
+  when: >
+    ansible_distribution == "Amazon" or
+    (ansible_distribution == "CentOS" and
+    ansible_distribution_major_version < "7") or 
+    ansible_distribution == "Ubuntu"
+  tags: [service]
 
-# - name: Create nifi init.d service
-#   template: src=nifi-startup.sh.j2 dest=/etc/init.d/nifi owner=root group=root mode=0755
-#   when: >
-#     ansible_distribution == "Amazon" or
-#      (ansible_distribution == "CentOS" and
-#        ansible_distribution_major_version < "7") or 
-#        ansible_distribution == "Ubuntu"
-#   tags: [service]
+- name: Create nifi init.d service
+  template: src=nifi-startup.sh.j2 dest=/etc/init.d/nifi owner=root group=root mode=0755
+  when: >
+    ansible_distribution == "Amazon" or
+     (ansible_distribution == "CentOS" and
+       ansible_distribution_major_version < "7") or 
+       ansible_distribution == "Ubuntu"
+  tags: [service]
 
 - name: Remove nifi init.d service
   file: path=/etc/init.d/nifi state=absent
