@@ -33,6 +33,8 @@
   shell: "{{ nifi_bin_dir }}/nifi.sh install"
   register: grep_result
   tags: [scripts]
+  notify:
+    - reload systemd
      
 
 - name: Ensure NiFi service starts on reboot

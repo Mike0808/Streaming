@@ -1,12 +1,13 @@
 #!/bin/bash
 ### BEGIN INIT INFO
 # Provides:          nifi
-# Required-Start:    $all
-# Required-Stop:
+# Required-Start:    $network $local_fs $remote_fs
+# Required-Stop:     $network $local_fs $remote_fs
 # Default-Start:     2 3 4 5
-# Default-Stop:
-# Short-Description: Halts USB power...
+# Default-Stop:      0 1 6
+# Short-Description: nifi
 ### END INIT INFO
+
 [Unit]
 Description=Apache NiFi
 After=syslog.target network.target
