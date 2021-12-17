@@ -98,8 +98,8 @@
     mode: 0644
   tags: [java, zookeeper]
 
-- name: include ./nifi/common.yml
-  include_tasks: ./nifi/common.yml
+- name: include ./nifi/common.yaml
+  include_tasks: ./nifi/common.yaml
 
 # - name: set zookeeper_install
 #   set_fact:
