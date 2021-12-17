@@ -31,6 +31,7 @@ nifi_java_min_heap: 512m
 nifi_java_max_heap: 512m
 
 # Web properties
+nifi_input_socket_host:
 nifi_web_http_host: "{{ ansible_hostname }}"
 nifi_web_http_port: 8080
 nifi_web_https_port: 8443
@@ -148,8 +149,30 @@ nifi_log_level_org_apache_nifi_web_api_AccessResource: INFO
 nifi_log_level_org_wali: WARN
 nifi_custom_log_levels: []
 
+# specify -Djava.io.tmpdir in bootstrap.conf, default is unspecified
+#nifi_tmp_dir: /tmp
+
+# Set this to true to enable remote debugging
+nifi_enable_remote_debugging: False
+nifi_remote_debugging_port: 8000
+
+# whether to restart nifi after making changes; default is True, for a cluster you may wish to disable
+nifi_perform_restart: True
+
+# whether to force a restart, useful if another role has made changes (such as updating a custom nar); default is False
+nifi_force_restart: False
+
+# A complete list of IP addresses for each nodes within the nifi cluster
+nifi_authorized_nodes_list: []
+
 # Extra Properties
 nifi_variable_registry_properties: [ "{{ nifi_conf_dir }}/extra-args.properties" ]
+
+# extra arg that are useful in expression languages
+nifi_extra_args: []
+
+# List of directories for nifi to look in for additional nars.
+nifi_custom_nars: []
 
 zookeeper_version: 3.7.0
 zookeeper_install: # set to 'local' to install ZooKeeper on the NiFi nodes, 'embedded' to use the embedded NiFi ZooKeeper server, and 'none' if providing an externally managed ZooKeeper to use with NiFi
