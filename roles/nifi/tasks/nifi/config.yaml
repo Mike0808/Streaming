@@ -30,7 +30,7 @@
   tags: [ scripts ]
 
 - name: install nifi like a service
-  shell: "{{ nifi_home }}/nifi.sh install"
+  shell: "{{ nifi_bin_dir }}/nifi.sh install"
   register: grep_result
   tags: [scripts]
      
