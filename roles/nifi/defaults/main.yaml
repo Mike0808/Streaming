@@ -31,7 +31,7 @@ nifi_java_min_heap: 512m
 nifi_java_max_heap: 512m
 
 # Web properties
-nifi_input_socket_host:
+nifi_input_socket_host: "{{ ansible_hostname }}"
 nifi_web_http_host: "{{ ansible_hostname }}"
 nifi_web_http_port: 8080
 nifi_web_https_port: 8443
@@ -53,7 +53,7 @@ nifi_cluster_flow_election_max_wait_time: 5
 nifi_cluster_flow_election_max_candidates: 2
 
 nifi_log_compression: gzip
-nifi_zookeeper_connect_string: # set if have a zookeeper quorum
+nifi_zookeeper_connect_string: {{ zookeeper_connect_string }} # set if have a zookeeper quorum
 
 # Site to Site properties
 nifi_remote_input_host:
@@ -106,7 +106,7 @@ nifi_swap_in_threads: 1
 nifi_swap_out_threads: 4
 
 # NiFi zookeeper settings
-nifi_zookeeper_servers: ['control_node']
+nifi_zookeeper_servers: ['node1', 'node2']
 nifi_zookeeper_dir: zookeeper
 nifi_state_management_embedded_zookeeper_start: true
 nifi_zookeeper_root_node: '/nifi'
@@ -163,7 +163,7 @@ nifi_perform_restart: True
 nifi_force_restart: False
 
 # A complete list of IP addresses for each nodes within the nifi cluster
-nifi_authorized_nodes_list: []
+nifi_authorized_nodes_list: [node1, node2]
 
 # Extra Properties
 nifi_variable_registry_properties: [ "{{ nifi_conf_dir }}/extra-args.properties" ]
