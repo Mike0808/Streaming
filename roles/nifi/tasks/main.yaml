@@ -47,12 +47,12 @@
   when: ansible_virtualization_type != "docker"
   tags: [always]
 
-# - name: set vm.swapiness={{ vm_swapiness }}
-#   lineinfile:
-#     dest: /etc/sysctl.conf
-#     regexp: '^vm.swapiness='
-#     line: vm.swapiness={{ vm_swapiness }}
-#   tags: [always]
+- name: set vm.swapiness={{ vm_swapiness }}
+  lineinfile:
+    dest: /etc/sysctl.conf
+    regexp: '^vm.swapiness='
+    line: vm.swapiness={{ vm_swapiness }}
+  tags: [always]
 
 - name: include java/{{ ansible_os_family }}.yaml
   include_tasks: ./java/{{ ansible_os_family }}.yaml
