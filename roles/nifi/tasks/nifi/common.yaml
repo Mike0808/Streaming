@@ -38,10 +38,10 @@
 
 - name: set nifi package urls
   set_fact:
-    nifi_package_url: "{{ nifi_package_base_url | default(package_base_url, true) }}/nifi-{{ nifi_version }}-bin.zip"
-    nifi_toolkit_package_url: "{{ nifi_package_base_url | default(package_base_url, true) }}/nifi-toolkit-{{ nifi_version }}-bin.zip"
-    nifi_registry_package_url: "{{ nifi_package_base_url | default(package_base_url, true) }}/nifi-registry-{{ nifi_version }}-bin.zip"
-    nifi_registry_toolkit_package_url: "{{ nifi_package_base_url | default(package_base_url, true) }}/nifi-registry-toolkit-{{ nifi_version }}-bin.zip"
+    nifi_package_url: "{{ nifi_package_base_url | default(package_base_url, true) }}/nifi-{{ nifi_version }}-bin.tar.gz"
+    nifi_toolkit_package_url: "{{ nifi_package_base_url | default(package_base_url, true) }}/nifi-toolkit-{{ nifi_version }}-bin.tar.gz"
+    nifi_registry_package_url: "{{ nifi_package_base_url | default(package_base_url, true) }}/nifi-registry-{{ nifi_version }}-bin.tar.gz"
+    nifi_registry_toolkit_package_url: "{{ nifi_package_base_url | default(package_base_url, true) }}/nifi-registry-toolkit-{{ nifi_version }}-bin.tar.gz"
     cacheable: yes
 
 - name: create nifi install directory
