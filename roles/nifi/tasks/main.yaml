@@ -63,7 +63,7 @@
   block:
     - name: set java_security_file
       set_fact:
-        java_security_file: "{{ java_home }}/{{ (java_version|string == '1.8' or java_version|string == '1.8.0' or java_version|string == '8') | ternary('jre/lib/security/java.security', 'conf/security/java.security') }}"
+        java_security_file: "{{ nifi_java_home }}/{{ (java_version|string == '1.8' or java_version|string == '1.8.0' or java_version|string == '8') | ternary('jre/lib/security/java.security', 'conf/security/java.security') }}"
         cacheable: yes
       tags: [java, zookeeper]
 

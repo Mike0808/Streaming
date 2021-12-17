@@ -17,8 +17,8 @@
 #
 
 # The java implementation to use.
-{% if nifi_java_home is defined %}
-export JAVA_HOME={{ nifi_java_home }}
+{% if java_home is defined %}
+export JAVA_HOME={{ java_home }}
 {% else %}
 #export JAVA_HOME=/usr/java/jdk1.8.0/
 {% endif %}
