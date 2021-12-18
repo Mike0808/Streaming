@@ -3,7 +3,7 @@
   hosts: all
   vars: 
     nifi_log_level_root: WARN
-    nifi_node_jvm_memory: '-Xms3072'
+    nifi_node_jvm_memory: '512m'
     nifi_custom_nars: [ '/opt/extra-nars' ]
     nifi_single_node: False
     nifi_authorized_nodes_list: ['node1', 'node2']  
